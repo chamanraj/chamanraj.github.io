@@ -1,0 +1,129 @@
+* {
+  box-sizing: border-box;
+}
+
+h4 {
+  text-align: center;
+  color: #303841;
+  font-family: 'Dosis', sans-serif;
+
+}
+
+body {
+  /*background-color: #6C737E;*/
+  background-color: #6C737E;
+  z-index: -15;
+}
+
+a {
+  text-decoration: none;
+  color: #E8ECF1;
+  font-weight: bold;
+}
+
+.calculator {
+  width: 300px;
+  height: 426px;
+  margin-top: 10%;
+  border-radius: 20px;
+  background-color: #FCFAEF;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-box-shadow: 10px 10px 28px 15px rgba(82,97,107,1);
+  -moz-box-shadow: 10px 10px 28px 15px rgba(82,97,107,1);
+  box-shadow: 10px 10px 28px 15px rgba(82,97,107,1);
+  border: 1px groove;
+}
+
+.top-text {
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 14px;
+
+}
+
+.display {
+  width: 254px;
+  height: 70px;
+  background-color: #E2E0A5;
+  border-radius: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Orbitron', sans-serif;
+  text-align: right;
+  border: 2px solid #e2de64;
+}
+
+.larger-text {
+  padding-top: 10px;
+  font-size: 35px;
+  margin-right: 12px;
+}
+
+.smaller-text {
+  font-size: 12px;
+  margin-right: 16px;
+  padding-top: 4px;
+  color: gray;
+}
+
+.row1 {
+  display: flex;
+  padding-top: 14px;
+  margin-left: 23px;
+  flex-wrap: wrap;
+}
+
+button {
+  background-color: #303841;
+  color: white;
+  border-radius: 12px;
+  font-family: 'Orbitron', sans-serif;
+  display: table-cell;
+  vertical-align: middle;
+  height: 44px;
+  width: 54px;
+  margin-right: 12px;
+  font-weight: bold;
+  font-size: 14px;
+  /*border: 3px solid outset;*/
+  border: none;
+  box-shadow: 0 2px #031e3d;
+  z-index: 2;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:active {
+  box-shadow: 0 1px #031e3d;
+  margin-top: 2px;
+
+}
+
+.special-buttons {
+  background-color: #B01C33;
+  box-shadow: 0 2px #3d1022;
+}
+
+.row2 {
+  display: flex;
+}
+
+.special-button2 {
+  height: 98px;
+}
+
+.special-button3 {
+  width: 120px;
+  margin-top: -54px;
+}
+
+.special-button4 {
+  margin-top: -54px;
+}
