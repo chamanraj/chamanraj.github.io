@@ -1,0 +1,56 @@
+header a {
+  background-image: url("logo web.png");
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 253px;
+  height: 102px;
+  background-size: 253px 102px;
+
+}
+
+.body-background {
+  background-color: #f25e42;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 2em;
+  margin-top: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+
+
+}
+
+
+
+.address {
+  font-family: 'Francois One', sans-serif;
+  font-size: 22px;
+  color: #3F494D;
+}
+
+.title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 34px;
+  text-transform: uppercase;
+  color: #E42F45;
+  margin-bottom: 20px;
+}
+
+.address a {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.border-sepration {
+  border-right: 1px solid gray;
+}
+
+@media screen and (max-width: 991px) {
+  .body-background {
+    width: 100%;
+  }
+}
