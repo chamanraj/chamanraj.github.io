@@ -1,0 +1,173 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dohful Scan and Pay Training</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+    .slide { display: none; width: 80%; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .slide.active { display: block; }
+    h1 { color: #d9534f; text-align: center; }
+    h2 { color: #333; }
+    ul { font-size: 18px; line-height: 1.6; }
+    .nav { text-align: center; margin: 20px; }
+    .nav button { padding: 10px 20px; margin: 0 10px; background: #d9534f; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .nav button:hover { background: #c9302c; }
+    .interactive { background: #e8f4f5; padding: 15px; border-left: 5px solid #5bc0de; }
+    a { color: #d9534f; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="slide active" id="slide1">
+    <h1>Welcome to Dohful Scan and Pay Training</h1>
+    <p style="text-align: center; font-size: 20px;">Learn how to introduce customers to Scan and Pay and make it a success!</p>
+    <p style="text-align: center;">Let’s get started.</p>
+  </div>
+
+  <div class="slide" id="slide2">
+    <h2>What is Scan and Pay?</h2>
+    <ul>
+      <li>A digital ordering system for takeaway and dine-in.</li>
+      <li>Customers scan a QR code or visit <a href="https://order.dohful.com" target="_blank">order.dohful.com</a> to order and pay via their phone.</li>
+      <li>Offers <strong>5% cashback</strong> on every order, credited for future use.</li>
+      <li>QR codes on tables and counters link to <a href="https://order.dohful.com" target="_blank">order.dohful.com</a>.</li>
+    </ul>
+    <div class="interactive">
+      <p><strong>Quick Quiz</strong>: What are the two ways customers can access Scan and Pay? (Answer: Scan QR code or visit order.dohful.com)</p>
+    </div>
+  </div>
+
+  <div class="slide" id="slide3">
+    <h2>Why Customers Love Scan and Pay</h2>
+    <ul>
+      <li><strong>Convenience</strong>: Skip lines for takeaway; order from the table for dine-in.</li>
+      <li><strong>Speed</strong>: Instant order processing reduces wait times.</li>
+      <li><strong>Savings</strong>: 5% cashback on every order.</li>
+      <li><strong>Safety</strong>: Contactless ordering and payment.</li>
+    </ul>
+    <div class="interactive">
+      <p><strong>Discussion</strong>: How can these benefits appeal to a rushed customer? A regular customer?</p>
+    </div>
+  </div>
+
+  <div class="slide" id="slide4">
+    <h2>Your Role as Staff</h2>
+    <ul>
+      <li><strong>Promote</strong>: Highlight the 5% cashback and ease of use.</li>
+      <li><strong>Assist</strong>: Guide customers to scan QR codes or visit <a href="https://order.dohful.com" target="_blank">order.dohful.com</a>.</li>
+      <li><strong>Troubleshoot</strong>: Fix issues like QR code scanning or payment errors.</li>
+      <li><strong>Maintain</strong>: Keep QR codes clean and functional.</li>
+      <li><strong>Feedback</strong>: Share customer reactions with management.</li>
+    </ul>
+  </div>
+
+  <div class="slide" id="slide5">
+    <h2>How to Talk to Customers</h2>
+    <p><strong>Scenario 1: Curious Customer</strong></p>
+    <p><em>Customer</em>: “What’s this QR code?”</p>
+    <p><em>You</em>: “It’s our Scan and Pay feature! Scan it or visit order.dohful.com to order and pay from your phone, plus get 5% cashback. Want me to show you how?”</p>
+    <p><strong>Scenario 2: Rushed Customer</strong></p>
+    <p><em>Customer</em>: “I’m in a hurry.”</p>
+    <p><em>You</em>: “Try Scan and Pay! Scan the QR code or go to order.dohful.com, order, and pay in seconds. You’ll also get 5% cashback!”</p>
+    <div class="interactive">
+      <p><strong>Role-Play</strong>: Pair up and practice these conversations, including mentioning order.dohful.com. Switch roles after 2 minutes.</p>
+    </div>
+  </div>
+
+  <div class="slide" id="slide6">
+    <h2>Troubleshooting Common Issues</h2>
+    <ul>
+      <li><strong>QR Code Not Scanning</strong>: Check for smudges or lighting. Suggest using camera or QR app. Alternatively, direct to <a href="https://order.dohful.com" target="_blank">order.dohful.com</a>.</li>
+      <li><strong>Website Not Loading</strong>: Check internet connection. Suggest refreshing or Wi-Fi. Confirm they’re on <a href="https://order.dohful.com" target="_blank">order.dohful.com</a>.</li>
+      <li><strong>Payment Issues</strong>: Suggest retrying or alternative payment methods. Offer manual ordering as fallback.</li>
+    </ul>
+    <div class="interactive">
+      <p><strong>Practice</strong>: Simulate a QR code issue and troubleshoot, including suggesting order.dohful.com. Practice with a partner.</p>
+    </div>
+  </div>
+
+  <div class="slide" id="slide7">
+    <h2>Let’s Make Scan and Pay a Success!</h2>
+    <ul>
+      <li>Smile and be patient with customers.</li>
+      <li>Always mention the 5% cashback and <a href="https://order.dohful.com" target="_blank">order.dohful.com</a> as an option.</li>
+      <li>Offer help to first-time users.</li>
+      <li>Keep QR codes clean and report issues.</li>
+      <li>Share customer feedback with management.</li>
+    </ul>
+    <p style="text-align: center; font-size: 20px;">You’re ready to help customers save and enjoy Dohful with Scan and Pay!</p>
+  </div>
+
+  <div class="nav">
+    <button onclick="prevSlide()">Previous</button>
+    <button onclick="nextSlide()">Next</button>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 7;
+
+    function showSlide(n) {
+      document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+      document.getElementById(`slide${n}`).classList.add('active');
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    showSlide(currentSlide);
+  </script>
+</body>
+</html>
